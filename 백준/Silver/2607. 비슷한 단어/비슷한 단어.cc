@@ -2,54 +2,49 @@
 
 int main() {
 	int N;
-	std::cin >> N;
-	int STD[N][26];
+	int letnum_first;
+	int letnum_rm;
+	int diff;
+	int flag;
 	
+	std::cin >> N;
+	int count_alp[N][26];
 	for(int i = 0; i < N; i++)
 		for(int j = 0; j < 26; j++)
-			STD[i][j] = 0;
+			count_alp[i][j] = 0;
 	
-	std::string arr[N];
+	std::string num[N];
 	for(int i = 0; i < N; i++)		//N개의 문자열 배열에 저장.
-		std::cin >> arr[i];
-	for(int i = 0; i < N; i++)
-		for(int j = 0; arr[i][j]; j++)
-			STD[i][arr[i][j] - 'A']++;
+		std::cin >> num[i];
 
-	int zerosum;
-	int numsum;
-	int flag;
-	int diff;
-	zerosum = 0;
-	numsum = 0;
+	for(int i = 0; i < N; i++)
+		for(int j = 0; num[i][j]; j++)
+			count_alp[i][num[i][j] - 'A']++;
+
+	letnum_first = 0;
+	
 	for(int i = 0; i < 26; i++)
-		zerosum += STD[0][i];
-	flag = 0;
+		letnum_first += count_alp[0][i]; //첫 단어 갯수 세기
+	
+	letnum_rm = 0;
+	diff = 0;
+	flag = 0; 						//이후에 더해질 자기자신 제외.
+
 	for(int i = 1; i < N; i++){
-		diff = 0;
-		for(int j = 0; j < 26; j++){	//모든 범위에서의 차이가 0, 1인지 확인.
-			diff += abs(STD[i][j] - STD[0][j]);
-			if(diff == 3)				//다시보기
-				break;
-		}
-		if(diff == 0 || diff == 1)
+		for(int j = 0; j < 26; j++)
+			diff += abs(count_alp[i][j] - count_alp[0][j]);
+		if(diff == 0 || diff == 1)	//모든 범위에서의 차이가 0, 1인지 확인.
 			flag++;
 		else if(diff == 2){
 			for(int j = 0; j < 26; j++)
-				numsum += STD[i][j];
-			if(numsum == zerosum)
+				letnum_rm += count_alp[i][j];
+			if(letnum_rm == letnum_first)
 				flag++;
-			numsum = 0;
+			letnum_rm = 0;
 		}										//else if( == 2) 총 배열의 합이 같으면 flag++
+		diff = 0;
 	}
-
+	// flag -= 1;
 	std::cout << flag;
-	// std::cin >> X;
-	// int arr[N];
-	// for (int i = 0; i < N; i++)
-	// 	std::cin >> arr[i];
-	// for (int i = 0; i < N; i++)
-	// 	if (arr[i] < X)
-	// 		std::cout << arr[i] << " ";
 	return 0;
 }
