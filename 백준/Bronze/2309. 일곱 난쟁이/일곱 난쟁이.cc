@@ -1,33 +1,28 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-int arr[13], sum, i, j, flag;
+int h[13], sum, rem, x1, x2;
 
-int main()
-{
-    //입력받자
-    for(int i = 0; i < 9; i++){
-        cin >> arr[i];
-        sum += arr[i];
-    }
-    sort(arr, arr + 9);
-    //100맞추자
-    sum -= 100;
-    for(i = 0; i < 9; i++){ //조합으로 2개씩 뽑아서 100외에 두 녀석인지 확인.
-        for(j = i + 1; j < 9; j++)
-            if(arr[i] + arr[j] == sum){
-                flag = 1;
-                break;
-            }
-        if(flag == 1)
-            break;
-    }
-    for(int z = 0; z < i; z++)// 그 두녀석 빼고 나머지 출력.
-        cout << arr[z] << '\n';
-    for(int z = i + 1; z < j; z++)
-        cout << arr[z] << '\n';
-    for(int z = j + 1; z < 9; z++)
-        cout << arr[z] << '\n';
-    
-    return 0;
+int main(){
+	for(int i = 0; i < 9; i++){
+		cin >> h[i];
+		sum += h[i];
+	}
+	sort(h, h + 9);
+	rem = sum - 100;
+	
+	for(x1 = 0; x1 < 8; x1++){
+		for(x2 = x1 + 1; x2 < 9; x2++)
+			if(h[x1] + h[x2] == rem)
+				break;
+		if(h[x1] + h[x2] == rem)
+			break;
+	}
+	for(int i = 0; i < 9; i++){
+		if(i == x1 || i == x2) continue;
+		cout << h[i] << "\n";
+	}
+	
+	return 0;
 }
