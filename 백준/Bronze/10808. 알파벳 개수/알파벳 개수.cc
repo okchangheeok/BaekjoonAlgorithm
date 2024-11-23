@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-string str;
-map<char, int> mp;
+int a[26];
+string S;
 
-int main()
-{
-    cin >> str;
-    
-    for(auto i : str)
-        mp[i]++;
-    
-    for(char i = 'a'; i <= 'z'; i++)
-        cout << mp[i] << " ";
-    return 0;
+int main(){
+	cin >> S;
+	for(char it: S)
+		a[it - 'a']++;
+	
+	for(int it: a)
+		cout << it << " ";
+	
+	return 0;
 }
