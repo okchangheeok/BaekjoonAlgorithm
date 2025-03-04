@@ -22,15 +22,13 @@ int main()
     v[1].push_back(3);
     v[1].push_back(5);
     v[1].push_back(7);
-	for(int i = 2; i <= N; i++){
-		for(int it: v[i - 1]){
+	for(int i = 2; i <= N; i++)
+		for(int it: v[i - 1])
 			for(int j = 0; j < 4; j++){
 				tmp = 10 * it + pls[j];
 				if(ck_sosoo(tmp))
 					v[i].push_back(tmp);
 			}
-		}
-	}
 	
 	for(auto it: v[N])
 		cout << it << "\n";
