@@ -3,10 +3,8 @@ using namespace std;
 
 int N, M, A, B, A_lev, B_lev, lev_dif;
 vector<vector<int>> tree(33000);
-int level[33000];
 int upper[33000];
 queue<int> q;
-vector<vector<int>> ans_level(33000); 
 
 int ch_lev(int node){
 	if(upper[node] == 0) return 0;
@@ -34,7 +32,7 @@ int main(){
 			upper[B] = A;
 		}
 	}
-    
+
 	//bfs 방식으로 출력 
 	q.push(0);
 	while(q.size()){
