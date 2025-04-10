@@ -24,7 +24,7 @@ int main(){
 	}
 	
 	
-	while(A.size() && B.size()){
+	while(A.size()){
 		//B와 겹치는 것만 A에 남기기
 		for(auto it = A.begin(); it != A.end();){
 			if(find(B.begin(), B.end(), *it) == B.end())
