@@ -1,27 +1,29 @@
-#include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
-int N, K;
+int N, K, stdd, ans;
+int cd[100005];
 
-int main()
-{
-    cin >> N >> K;
-    int arr[N];
-    int sum[N - K + 1];
-    //memset(sum, 0, sizeof(sum));
-    for(int i = 0; i < N; i++)
-        cin >> arr[i];
-    
-    //for(int i = 0; i < N - K + 1; i++)
-    //    sum[i] = accumulate(arr + i, arr + K + i, 0);
-    
-    sum[0] = accumulate(arr, arr + K, 0);
-    for(int i = 1; i < N - K + 1; i++){
-        sum[i] = sum[i - 1] - arr[i - 1] + arr[i + K - 1];
-    }
-    // for(int i = 0; i < N - K + 1; i++)
-    //     cout << sum[i] << " ";
-    cout << *max_element(sum, sum + N - K + 1);
-    
-    return 0;
+int main(){
+	ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+	
+	cin >> N >> K;
+	for(int i = 0; i < N; i++)
+		cin >> cd[i];
+	
+	for(int i = 0; i < K; i++)
+		stdd += cd[i];
+	
+	ans = stdd;
+	for(int i = K; i < N; i++){
+		stdd += cd[i];
+		stdd -= cd[i - K];
+		ans = max(ans, stdd);
+	}
+	
+	cout << ans;
+	
+	return 0;
 }
