@@ -1,30 +1,33 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <map>
+
 using namespace std;
 
-int T, N, ans;
-map<string, int> mp;
+int T, n, ans = 1;
 string tmp;
-
+map<string, int> m;
 
 int main(){
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    cin >> T;
-    for(int i = 0; i < T; i++){
-        ans = 1;
-        
-        cin >> N;
-        for(int j = 0; j < N; j++){
-            cin >> tmp >> tmp;
-            mp[tmp]++;
-        }
-        for(auto it : mp){
-            ans *= it.second + 1;
-        }
-        
-        cout << ans - 1 << '\n';
-        mp.clear();
-    }
+	ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
     
-    return 0;
+    cin >> T;
+    while(T--){
+    	cin >> n;
+    	while(n--){
+    		cin >> tmp;
+    		cin >> tmp;
+    		
+    		m[tmp]++;
+		}
+		for(auto it: m)	ans *= (it.second + 1);
+		
+		cout << ans - 1 << "\n";
+		
+		m.clear();
+		ans = 1;
+	}
+	
+	return 0;
 }
