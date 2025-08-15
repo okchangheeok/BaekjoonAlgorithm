@@ -4,30 +4,25 @@
 using namespace std;
 
 int N;
-string pat, pre, suf, tmp;
+string stdd, pre, nex, tmp;
 
 int main(){
 	ios::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
-	
-	//1
+    
 	cin >> N;
-	//2
-	cin >> pat;
+	cin >> stdd;
 	
-	int i = pat.find('*');
-	pre = pat.substr(0, i);
-	suf = pat.substr(i + 1);
-	//3~
+	int i = stdd.find('*');
+	pre = stdd.substr(0, i);
+	nex = stdd.substr(i + 1);
+	
 	while(N--){
 		cin >> tmp;
-		
-		if(tmp.size() < pat.size() - 1)
-			cout << "NE\n";
-		else if(tmp.substr(0, pre.size()) == pre && tmp.substr(tmp.size() - suf.size()) == suf)
+		if(tmp.size() < stdd.size() - 1) cout << "NE\n";
+		else if(tmp.substr(0, pre.size()) == pre && tmp.substr(tmp.size() - nex.size()) == nex)
 			cout << "DA\n";
-		else
-			cout << "NE\n";
+		else cout << "NE\n";
 	}
 	
 	return 0;
