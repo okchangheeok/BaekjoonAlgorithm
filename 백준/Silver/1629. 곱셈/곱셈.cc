@@ -13,17 +13,16 @@ long long go(long long b){
 	ret = (ret * ret) % C;
 	
 	if(b % 2 == 1) ret = (ret * A) % C;
-	
 	return ret;
 }
 
 int main(){
 	ios::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
-    
-    cin >> A >> B >> C;
-    
-    cout << go(B);
-    
+
+	cin >> A >> B >> C;
+
+	cout << go(B);
+	
 	return 0;
 }
