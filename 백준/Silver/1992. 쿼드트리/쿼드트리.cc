@@ -1,64 +1,44 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-int N, first, flag;
-string str[70];
-string ans;
-int cd[70][70];
+int N;
+char cd[70][70];
 
-int dy(int n, int idx){
-	return (idx / 2) * (n / 2);
-}
+const int dy[] = {-1, -1, 0, 0};
+const int dx[] = {-1, 0, -1, 0};
 
-int dx(int n, int idx){
-	return (idx % 2) * (n / 2);
-}
-void dfs(int y, int x, int n){
-	if(n != 1) ans += "(";
-	for(int idx = 0; idx < 4; idx++){
-		flag = 1;
-		first = cd[y + dy(n, idx)][x + dx(n, idx)];
-		for(int i = y + dy(n, idx); i < y + dy(n, idx) + n / 2; i++){
-			for(int j = x + dx(n, idx); j < x + dx(n, idx) + n / 2; j++){
-				if(cd[i][j] != first){
-					dfs(y + dy(n, idx), x + dx(n, idx), n / 2);
-					flag = 0;
-					break;
-				}
-			}
-			if(flag == 0)
-				break;
-		}
-		if(flag == 1)
-			ans += '0' + first;
+string dfs(int y, int x, int n){
+	string ret;
+	
+	if(n == 1) {
+		ret += cd[y][x];
+		return ret;
 	}
-	if(n != 1) ans += ")";
+	for(int i = 0; i < 4; i++){
+		int ny = y + dy[i] * n / 2;
+		int nx = x + dx[i] * n / 2;
+		ret += dfs(ny, nx, n / 2);
+	}
+	if(ret == "1111")		ret = "1";
+	else if(ret == "0000")	ret = "0";
+	else					ret = "(" + ret + ")";
+	
+	return ret;
 }
 
-int main(){
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	
 	cin >> N;
-	if(N == 1){
-		cin >> N;
-		cout << N;
-		exit (0);
-	}
-	for(int i = 0; i < N; i++){
-		cin >> str[i];
-		for(int j = 0; j < N; j++)
-			cd[i][j] = str[i][j] - '0';	
-	}
-	dfs(0, 0, N);
 	
-	if(ans.size() == 6)
-		if(ans[1] == ans[2])
-			if(ans[1] == ans[3])
-				if(ans[1] == ans[4]){
-					cout << ans[1];
-					exit (0);
-				}
-	cout << ans;
+	for(int i = 1; i <= N; i++)
+		for(int j = 1; j <= N; j++)
+			cin >> cd[i][j];
 	
-	
+	cout << dfs(N, N, N);
+
 	return 0;
 }
