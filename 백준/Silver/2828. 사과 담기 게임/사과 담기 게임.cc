@@ -1,28 +1,31 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-int N, M, J, cd, ap, ans;
+int N, M, J, cur = 1, tmp, ans;
 
-int main()
-{
-    cd = 1;
-    cin >> N >> M >> J;
-    for(int i = 0; i < J; i++){
-        cin >> ap;
-        if(cd <= ap && ap <= cd + M - 1)
-            continue;
-        else if(ap < cd){
-            ans += cd - ap;
-            cd = ap;
-        }
-        else{
-            ans += ap - (cd + M - 1);
-            cd = ap - (M - 1);
-        }
-    }
-    
-    cout << ans;
-    
-    return 0;
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+
+	cin >> N >> M;
+	cin >> J;
+	
+	while(J--){
+		cin >> tmp;
+		
+		if(cur <= tmp && tmp < cur + M) continue;
+		else if(tmp < cur){
+			ans += cur - tmp;
+			cur = tmp;
+		}
+		else{
+			ans += tmp - (cur + M - 1);
+			cur = tmp - M + 1;
+		}
+	}
+	
+	cout << ans;
+
+	return 0;
 }
