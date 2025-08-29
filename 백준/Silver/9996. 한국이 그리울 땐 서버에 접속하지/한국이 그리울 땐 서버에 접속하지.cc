@@ -4,26 +4,34 @@
 using namespace std;
 
 int N;
-string stdd, pre, nex, tmp;
+string stdd, pre, suf, tmp;
 
-int main(){
+string chk(string a){
+	string ret = "0";
+	if(a.size() < stdd.size() - 1) ret = "NE\n";
+	else if(a.substr(0, pre.size()) == pre && a.substr(a.size() - suf.size()) == suf)
+		ret = "DA\n";
+	else ret = "NE\n";
+	
+	return ret;
+}
+
+int main()
+{
 	ios::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
-    
+
 	cin >> N;
 	cin >> stdd;
 	
-	int i = stdd.find('*');
-	pre = stdd.substr(0, i);
-	nex = stdd.substr(i + 1);
+	auto l = stdd.find('*');
+	pre = stdd.substr(0, l);
+	suf = stdd.substr(l + 1);
 	
-	while(N--){
+	for(int i = 0; i < N; i++){
 		cin >> tmp;
-		if(tmp.size() < stdd.size() - 1) cout << "NE\n";
-		else if(tmp.substr(0, pre.size()) == pre && tmp.substr(tmp.size() - nex.size()) == nex)
-			cout << "DA\n";
-		else cout << "NE\n";
+		cout << chk(tmp);
 	}
 	
-	return 0;
+    return 0;
 }
