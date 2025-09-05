@@ -2,28 +2,21 @@
 
 using namespace std;
 
-int N, K, stdd, ans;
-int cd[100005];
+int N, K, tmp, ans = -10000005;
+int psum[100005];
 
-int main(){
-	ios::sync_with_stdio(0);
-    cin.tie(0); cout.tie(0);
-	
-	cin >> N >> K;
-	for(int i = 0; i < N; i++)
-		cin >> cd[i];
-	
-	for(int i = 0; i < K; i++)
-		stdd += cd[i];
-	
-	ans = stdd;
-	for(int i = K; i < N; i++){
-		stdd += cd[i];
-		stdd -= cd[i - K];
-		ans = max(ans, stdd);
-	}
-	
-	cout << ans;
-	
-	return 0;
+int main()
+{
+    cin >> N >> K;
+    for(int i = 1; i <= N; i++){
+        cin >> tmp;
+        psum[i] = psum[i - 1] + tmp;
+    }
+    
+    for(int i = K; i <= N; i++)
+        ans = max(ans, psum[i] - psum[i - K]);
+    
+    cout << ans;
+    
+    return 0;
 }
